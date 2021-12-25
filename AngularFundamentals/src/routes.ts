@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 import { Error404Component } from "./app/errors/404.component";
+import { CreateSessionComponent } from "./app/events/event-details";
 import { EventDetailsComponent } from "./app/events/event-details/event-details.component";
 import { EventRouteActivator } from "./app/events/event-details/event-route-activator.service";
 import { EventListResolver } from "./app/events/event-list-resolver.service";
@@ -11,6 +12,7 @@ export const appRoutes:Routes =[
         canDeactivate:['canDeactivateCreateEvent']},
     {path:'events', component: EventsListComponent, resolve:{events: EventListResolver}},
     {path:'events/:id', component: EventDetailsComponent, canActivate:[EventRouteActivator]},
+    {path:'events/session/new', component: CreateSessionComponent},
     {path:'404', component: Error404Component},
     
     {path:'user',  loadChildren: ()=>import("./app/user/user.module").then(m => m.UserModule)},
