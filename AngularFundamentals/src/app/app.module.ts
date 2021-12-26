@@ -6,7 +6,7 @@ import { EventsThumbnailComponent } from './events/events-thumbnail.component';
 import { NavBarComponent } from './nav/navbar.component';
 import { EventService } from './events/shared/event.service';
 // import { ToastrService } from './common/toastr.service';
-import { Toastr, TOASTR_TOKEN } from './common/toastr.service';
+// import { Toastr, TOASTR_TOKEN } from './common/toastr.service';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { appRoutes } from 'src/routes';
 import { RouterModule } from '@angular/router';
@@ -17,11 +17,13 @@ import { EventListResolver } from './events/event-list-resolver.service';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateSessionComponent, SessionListComponent } from './events/event-details';
-import { CollapsibleWellComponent } from './common/collapsible-well.component';
+// import { CollapsibleWellComponent } from './common/collapsible-well.component';
 import { DurationPipe } from './events/shared';
+import { CollapsibleWellComponent, JQ_TOKEN, TOASTR_TOKEN, Toastr, SimpleModalComponent, ModalTriggerDirective } from './common';
 //import { CreateSessionComponent } from '.events/index';
 
 declare let toastr:Toastr; //Declare toastr service as it is global
+let jQuery = window['$'];
 @NgModule({
   imports: [
     BrowserModule,
@@ -41,13 +43,16 @@ declare let toastr:Toastr; //Declare toastr service as it is global
     CreateSessionComponent,
     SessionListComponent,
     CollapsibleWellComponent,
-    DurationPipe
+    DurationPipe,
+    SimpleModalComponent,
+    ModalTriggerDirective
   ],
   
   providers: [
     EventService,
     // ToastrService,   // Toster service using Class as injectable
     {provide:TOASTR_TOKEN, useValue: toastr},   // Toster service using InjectionToken as injectable Here  we are telling Use TOASTR_TOKEN for toastr whenever we need it
+    {provide:JQ_TOKEN, useValue: jQuery},
     EventRouteActivator, //this syntax is same as {provide:EventRouteActivator, useClass: EventRouteActivator}   it is long hand way and which we used is sort hand
     AuthService,
     {
