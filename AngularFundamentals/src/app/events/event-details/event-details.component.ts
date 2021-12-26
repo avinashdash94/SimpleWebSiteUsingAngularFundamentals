@@ -15,6 +15,8 @@ import { EventService } from "../shared/event.service";
 export class EventDetailsComponent  {
     event:any;
     addMode:boolean;
+    filterBy: string = 'all';
+    
     constructor(private eventService: EventService, private route:ActivatedRoute){}
     ngOnInit(){
         this.event = this.eventService.getEvent(+this.route.snapshot.params['id']);
