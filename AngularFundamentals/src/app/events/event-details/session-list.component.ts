@@ -15,12 +15,14 @@ import { ISession } from "../shared";
 export class SessionListComponent implements OnChanges {
  
  @Input() filterBy: string;
+ @Input() sortBy: string;
  @Input() sessions: ISession[];
  visibleSessions: ISession[] = [];
 
  ngOnChanges() {
     if(this.sessions){
       this.filterSession(this.filterBy);
+      this.sortBy === 'name' ? this.visibleSessions.sort(sortByNameAsc): this.visibleSessions.sort(sortByVotesDesc)
     }
   }
   filterSession(filter){
@@ -33,6 +35,15 @@ export class SessionListComponent implements OnChanges {
       })
     }
   }
+}
+
+function sortByNameAsc(s1:ISession, s2:ISession){
+  if(s1.name > s2.name) return 1;
+  else if(s1.name === s2.name) return 0;
+  return -1;
+}
+function sortByVotesDesc(s1:ISession, s2:ISession){
+  return s1.voters.length - s2.voters.length ;
 }
 
   
